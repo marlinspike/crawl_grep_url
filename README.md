@@ -16,10 +16,7 @@ CrawlGrepURL is a Python application that takes a root URL, extracts all links o
 - Python 3.10+
 - Docker
 - The following Python packages:
-  - `requests`
-  - `beautifulsoup4`
   - `selenium`
-  - `webdriver-manager`
   - `rich`
 
 ## Installation

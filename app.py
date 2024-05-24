@@ -1,25 +1,22 @@
-import requests
-from bs4 import BeautifulSoup
 import os
-from datetime import datetime
 import re
-import argparse
 import time
-from rich.console import Console
-from rich.progress import track
-
+import argparse
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from rich.console import Console
+from rich.progress import track
 
 console = Console()
 
 def get_all_links(driver, root_url):
     driver.get(root_url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    elements = driver.find_elements(By.TAG_NAME, 'a')
     links = []
-    for link in soup.find_all('a', href=True):
-        url = link['href']
+    for element in elements:
+        url = element.get_attribute('href')
         if url and not url.startswith('javascript:'):
             if not url.startswith('http'):
                 url = os.path.join(root_url, url)
@@ -28,8 +25,8 @@ def get_all_links(driver, root_url):
 
 def fetch_text_content(driver, url):
     driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    return soup.get_text(separator="\n", strip=True)
+    body = driver.find_element(By.TAG_NAME, 'body')
+    return body.text
 
 def create_markdown_file(root_url, output_filename=None, output_folder='processed'):
     if output_filename is None:
@@ -42,7 +39,6 @@ def create_markdown_file(root_url, output_filename=None, output_folder='processe
     
     output_path = os.path.join(output_folder, output_filename)
     
-    # Set up Chrome options
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
@@ -51,7 +47,6 @@ def create_markdown_file(root_url, output_filename=None, output_folder='processe
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-software-rasterizer')
 
-    # Connect to the Selenium server running in Docker
     driver = webdriver.Remote(
         command_executor='http://localhost:4444/wd/hub',
         options=options
