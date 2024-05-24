@@ -1,6 +1,6 @@
 # CrawlGrepURL
 
-CrawlGrepURL is a Python application that takes a root URL, extracts all links on that page, and creates a single Markdown file with the contents of every link appended to it. The app is designed to work with dynamic web content using Selenium and Docker.
+CrawlGrepURL is a Python application that takes a root URL, extracts all links on that page, and creates a single Markdown file with the contents of every link appended to it. The app is designed to work with dynamic web content using Selenium in a Docker container. This is a great setup because you can run the app on any machine without worrying about browser compatibility or other fiddly stuff.
 
 ## Features
 
@@ -51,5 +51,5 @@ Arguments
 -f, --folder: Output folder (default is "processed").
 
 # Example
-```python app.py -u https://osc.github.io/ood-documentation/latest/index.html```
+```python app.py -u https://osc.github.io/ood-documentation/latest```
 
