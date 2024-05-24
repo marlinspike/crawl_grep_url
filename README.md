@@ -13,7 +13,7 @@ CrawlGrepURL is a Python application that takes a root URL, extracts all links o
 
 ## Requirements
 
-- Python 3.6 or higher
+- Python 3.10+
 - Docker
 - The following Python packages:
   - `requests`
