@@ -22,9 +22,6 @@ CrawlGrepURL is a Python application that takes a root URL, extracts all links o
 ## Installation
 
 1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/CrawlGrepURL.git
-   cd CrawlGrepURL
 
 ## Install the required Python packages
 ```pip install -r requirements.txt```
