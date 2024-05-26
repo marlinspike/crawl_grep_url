@@ -31,10 +31,16 @@ CrawlGrepURL is a Python application that takes a root URL, extracts all links o
 
 This lets you run Selenium tests in a headless Chrome browser. I'll be using Port 4444 to connect to the Selenium server.
 
+**Note:** That's the container image to use for Apple Silicon. If you're using Linux, you'd use:
+```docker pull selenium/standalone-chrome:latest```
+
 ### Run the Docker Image
 ```docker run -d -p 4444:4444 --name selenium-chrome seleniarm/standalone-chromium:latest```
 
 This command runs the Selenium server in a Docker container and exposes port 4444.
+
+**Note:** If you're on Linux, use the corresponding container image:
+```docker run -d -p 4444:4444 --name selenium-chrome selenium/standalone-chrome:latest```
 
 ## Usage
 ```python app.py -u <root_url> [-o <output_filename>] [-f <output_folder>]```
